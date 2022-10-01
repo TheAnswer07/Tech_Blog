@@ -1,6 +1,17 @@
 // setting up connection to our MySQL Workbench
 
-const { Sequelize } = require ('sequelize');
+require('dotenv').config();
 
-module.exports = new Sequelize(process.env.JAWSDB_URL || process.env.LOCALDB_URL);
+const Sequelize = require('sequelize');
 
+const sequelize = process.env.JAWSDB_URL
+  ? new Sequelize(process.env.JAWSDB_URL)
+  : new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.SECRET, {
+      host: 'localhost',
+      dialect: 'mysql',
+      dialectOptions: {
+        decimalNumbers: true,
+      },
+    });
+
+module.exports = sequelize;
