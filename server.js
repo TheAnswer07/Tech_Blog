@@ -1,54 +1,59 @@
 require('dotenv').config();
 
-const mysql = require('mysql2');
+// const mysql = require('mysql2');
 
 const express = require('express');
+const session = require('express-session');
+const exphbs = require('express-handlebars');
+const PORT = process.env.PORT || 3000;
+
 const { join } = require('path');
-const passport = require('passport');
+// const passport = require('passport');
 const { User } = require('./models');
-const { Strategy: JWTStrategy, ExtractJwt } = require('passport-jwt');
+// const { Strategy: JWTStrategy, ExtractJwt } = require('passport-jwt');
+const db = require('./db');
 const app = express();
+const sequelizeStore = require('connect-session-sequelize')(session.Store);
+const sess = {
+    secret: process.env.SECRET,
+    cookie: {},
+    resave: false,
+    saveUninitialize: true,
+    store: new sequelizeStore ({ db: db })
+}
 
-// Connect to database
-const db = mysql.createConnection(
-    {
-        host: 'localhost',
-        port: 3306,
-        // MySQL username,
-        user: 'root',
-        // MySQL password
-        password: 'password',
-        database: 'tech_blog_db'
-    })
-console.log(`Connected to the tech_blog_db database.`),
-
-
+app.use(session(sess));
+const hbs = exphbs.create({});
+app.engine('handlebars', hbs.engine);
+app.set("view engine", "handlebars");
 
 app.use(express.static(join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 
+// passport.use(User.createStrategy());
+// passport.serializeUser((user, done) => {
+//     done(null, user.id)
+// });
 
+// passport.use(new JWTStrategy({
+//     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+//     secretOrKey: process.env.SECRET
+// }, ({ id }, cb) => User.findOne({ where: { id } })
+//     .then(user => cb(null, user))
+//     .catch(err => cb(err))))
 
-passport.use(User.createStrategy());
-passport.serializeUser((user, done) => {
-    done(null, user.id)
-});
+app.use(require('./routes'));
 
-passport.use(new JWTStrategy({
-    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-    secretOrKey: process.env.SECRET
-}, ({ id }, cb) => User.findOne({ where: { id } })
-    .then(user => cb(null, user))
-    .catch(err => cb(err))))
+db.sync().then(() => {
+    console.log("Connected to DataBase!");
+    app.listen(PORT, () => {
+        console.log(`Server listing on ${PORT}`);
+    })
+})
 
-// app.use(require('./routes'));
-
-// require('./db').sync()
-//     .then(() => app.listen(process.env.PORT || 3000))
-//     .catch(err => console.log(err))
 
