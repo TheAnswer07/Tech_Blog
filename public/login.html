@@ -44,11 +44,11 @@
 
             let newUser = {
                 username: document.getElementById("username").value,
-                password: document.getElementById("username").value,
+                password: document.getElementById("password").value,
             }
             console.log(newUser);
 
-            axios.post('/api/users/loginr', newUser)
+            axios.post('/api/users/login', newUser)
             .then(res => {
                 console.log(res.data);
                 let token = res.data;

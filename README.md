@@ -7,7 +7,6 @@
 ## Table of Contents:
 * [Project Description](#project-description)
 * [User Story](#username)
-* [Credits](#credits)
 * [Features](#features)
 * [Contribution](#contribution)
 * [GitHub Profile Link](#github-profile)
@@ -20,17 +19,13 @@
 
 ### Project Description:
 
-X
+My challenge with this project is to build a CMS-style blog site similar to a Wordpress site, where developers can publish their blog posts and comment on other developers’ posts as well. I'm building this site completely from scratch and deploying it to Heroku. My app follows the MVC paradigm in its architectural structure, using Handlebars.js as the templating language, Sequelize as the ORM, and the express-session npm package for authentication.
 
 ### User Story:
 
 AS A developer who writes about tech
 I WANT a CMS-style blog site
 SO THAT I can publish articles, blog posts, and my thoughts and opinions
-
-### Credits:
-
-N/A
 
 ### Features:
 
@@ -50,13 +45,6 @@ You can contribute to this project by accessing my GitHub page.
 [GitHub App Link](https://theanswer07.github.io/Regex_Tutorial/)
 
 
-### Screenshots:
+### Screenshot of the App:
 
-
-1. Tech Blog generated via VSCode Terminal:
-
-![Tech Blog generated via VSCode Terminal](screenshots/ "Tech Blog generated via VSCode Terminal")
-
-3. Tech Blog UI:
-
-![Tech Blog UI](screenshots/ "Tech Blog UI")
+![Tech Blog UI](public/screenshot/Tech-Blog-UI.png "Tech Blog UI")
