@@ -10,10 +10,10 @@
 * [Features](#features)
 * [Contribution](#contribution)
 * [GitHub Profile Link](#github-profile)
+* [App Heroku Link](#app-heroku-link)
 * [GitHub App Link](#app-github-link)
-* [Screenshots:](#screenshots)
-    1. [Tech_Blog generated via VSCode Terminal](#Tech-Blog-generated-via-VSCode-Terminal)
-    3. [Tech_Blog UI](#Tech-Blog-UI)
+* [Screenshot:](#screenshot)
+    [Tech_Blog UI](#Tech-Blog-UI)
 
 
 
@@ -40,11 +40,14 @@ You can contribute to this project by accessing my GitHub page.
 
 [GitHub Profile](https://github.com/TheAnswer07)
 
+### App Heroku Link:
+
+[App Heroku Link](https://tech-blog-md1.herokuapp.com/)
+
 ### App GitHub Link:
 
 [GitHub App Link](https://theanswer07.github.io/Regex_Tutorial/)
 
-
-### Screenshot of the App:
+### Screenshot:
 
 ![Tech Blog UI](public/screenshot/Tech-Blog-UI.png "Tech Blog UI")
