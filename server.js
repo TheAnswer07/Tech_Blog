@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-// const mysql = require('mysql2');
+const mysql = require('mysql2');
 
 const express = require('express');
 const session = require('express-session');
@@ -8,9 +8,9 @@ const exphbs = require('express-handlebars');
 const PORT = process.env.PORT || 3000;
 
 const { join } = require('path');
-// const passport = require('passport');
+const passport = require('passport');
 const { User } = require('./models');
-// const { Strategy: JWTStrategy, ExtractJwt } = require('passport-jwt');
+const { Strategy: JWTStrategy, ExtractJwt } = require('passport-jwt');
 const db = require('./db');
 const app = express();
 const sequelizeStore = require('connect-session-sequelize')(session.Store);
@@ -31,21 +31,22 @@ app.use(express.static(join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// app.use(passport.initialize());
-// app.use(passport.session());
+app.use(passport.initialize());
+app.use(passport.session());
 
 
-// passport.use(User.createStrategy());
-// passport.serializeUser((user, done) => {
-//     done(null, user.id)
-// });
+passport.use(User.createStrategy());
+passport.serializeUser((user, done) => {
+    done(null, user.id)
+});
 
-// passport.use(new JWTStrategy({
-//     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-//     secretOrKey: process.env.SECRET
-// }, ({ id }, cb) => User.findOne({ where: { id } })
-//     .then(user => cb(null, user))
-//     .catch(err => cb(err))))
+
+passport.use(new JWTStrategy({
+    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+    secretOrKey: process.env.SECRET
+}, ({ id }, cb) => User.findOne({ where: { id } })
+    .then(user => cb(null, user))
+    .catch(err => cb(err))))
 
 app.use(require('./routes'));
 
@@ -54,6 +55,7 @@ db.sync().then(() => {
     app.listen(PORT, () => {
         console.log(`Server listing on ${PORT}`);
     })
-})
+});
+
 
 

@@ -23,7 +23,7 @@ router.post('/users/login', (req, res) => {
         if(err) {
             console.log(err)
         }
-        res.json(user ? jwt.sign({ id: user, id }, process.env.SECRET) : null)
+        res.json(user ? jwt.sign({ id: user.id }, process.env.SECRET) : null)
     })
 })
 
