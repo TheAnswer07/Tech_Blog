@@ -39,9 +39,6 @@
     <script>
         document.getElementById('register').addEventListener('click', event => {
             event.preventDefault()
-            // console.log(document.getElementById("username").value);
-            // console.log(document.getElementById("password").value)
-
             let newUser = {
                 username: document.getElementById("username").value,
                 password: document.getElementById("password").value,
@@ -51,7 +48,7 @@
             axios.post('/api/users/register', newUser)
             .then(res => {
                 console.log(res);
-                window.location = 'login.hmtl';
+                window.location = 'index.hmtl';
             })
         })
     </script>

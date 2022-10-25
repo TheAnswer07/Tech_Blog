@@ -56,13 +56,22 @@
             let posts = res.data;
             posts.forEach(post => {
               document.getElementById('posts').innerHTML +=
-            `
-            <h2> ${post.title} </h2>
-            <h3> ${User.username} </h3>
+                `
+            <h2 class="post" data-post="${post.id}"> ${post.title} </h2>
+            <h3> ${post.User.username} </h3>
             <h4> ${post.body} </h4>
+            <hr>
             `
             })
           })
+
+        document.addEventListener('click', event => {
+          if (event.target.classList.contains('post')) {
+            console.log(event.target.dataset.post);
+            let postId = event.target.dataset.post;
+            localStorage.setItem('post', postId)
+          }
+        })
 
         document.getElementById('post').addEventListener('click', event => {
           let newPost = {
