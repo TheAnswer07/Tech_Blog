@@ -57,8 +57,9 @@
             posts.forEach(post => {
               document.getElementById('posts').innerHTML +=
             `
-            <h4> ${post.title} </h4>
-            <h5> ${post.body} </h5>
+            <h2> ${post.title} </h2>
+            <h3> ${User.username} </h3>
+            <h4> ${post.body} </h4>
             `
             })
           })
