@@ -10,7 +10,10 @@ router.get('/posts', passport.authenticate('jwt'), async function (req, res) {
 });
 
 router.post('/posts', passport.authenticate('jwt'), async function (req, res) {
-    const post = await Post.create(req.body)
+    const post = await Post.create(
+        {...req.body,
+            uid: req.user.id
+        })
     res.json(post)
 });
 

@@ -55,7 +55,5 @@ db.sync().then(() => {
     app.listen(PORT, () => {
         console.log(`Server listing on ${PORT}`);
     })
-});
-
-
+})
 
