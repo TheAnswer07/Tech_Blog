@@ -50,7 +50,7 @@ passport.use(new JWTStrategy({
 
 app.use(require('./routes'));
 
-db.sync().then(() => {
+db.sync({force: true}).then(() => {
     console.log("Connected to DataBase!");
     app.listen(PORT, () => {
         console.log(`Server listing on ${PORT}`);
