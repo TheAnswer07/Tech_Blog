@@ -9,6 +9,11 @@ router.get('/posts', passport.authenticate('jwt'), async function (req, res) {
     res.json(posts)
 });
 
+router.get('/posts/:id', passport.authenticate('jwt'), async function (req, res) {
+    const post = await Post.findOne({ where: {id: req.params.id}, include: [User, Comment] })
+    res.json(post)
+});
+
 router.post('/posts', passport.authenticate('jwt'), async function (req, res) {
     const post = await Post.create(
         {...req.body,
