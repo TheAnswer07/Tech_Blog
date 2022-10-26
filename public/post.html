@@ -14,17 +14,72 @@
     <body>
 
         <div class="container">
-            <h1>User Comment</h1>
+            <h1 id="title"></h1>
+            <h4 id="body"></h4>
+
+
+            <div class="row">
+                <form class="col s12">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <textarea id="commentBody" class="materialize-textarea"></textarea>
+                            <label for="textarea1">Your comment here</label>
+                        </div>
+                    </div>
+                    <a id="submitComment" class="waves-effect waves-light btn-large">Submit Comment</a>
+                </form>
+            </div>
+
+            <div class="row">
+                <div id="commentsBody"></div>
+            </div>
+
         </div>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js"></script>
 
-    </body>
+        <script>
+            let postId = localStorage.getItem('post');
+            console.log(postId);
+            axios.get(`/api/posts/${postId}`, {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                }
+            })
+                .then(res => {
+                    console.log(res.data);
+                    document.getElementById('title').innerHTML = `${res.data.title}`
+                    document.getElementById('body').innerHTML = `${res.data.body}`
 
-    <script>
-        let postId = localStorage.getItem('post');
-        console.log('post');
-    </script>
+                    let comments = res.data.comments;
+                    comments.forEach(comment => {
+                        document.getElementById('commentsBody').innerHTML += 
+                        `
+                        ${comment.body}
+                        <br>
+                        `
+                    });
+                })
+
+            document.getElementById('submitComment').addEventListener('click', event => {
+                let newComment = {
+                    body: document.getElementById('commentBody').value,
+                    pid: postId
+                }
+                console.log(newComment);
+                axios.post('/api/comments', newComment, {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    }
+                })
+                .then(res => {
+                    console.log(res);
+            })
+
+        })
+
+        </script>
+    </body>
 
 </html>
