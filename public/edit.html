@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Edit Section</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    </head>
+
+    <body>
+        <nav>
+            <div class="nav-wrapper teal lighten-1">
+                <a href="#" class="brand-logo">TECH BLOG</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                    <li id="logout"><a>Logout</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="container">
+            <h1>Edit Post</h1>
+            <div class="row">
+                <div class="col s12">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <textarea id="title" class="materialize-textarea"></textarea>
+                            <label for="textarea1">Title</label>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+
+                <div class="row">
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <textarea id="body" class="materialize-textarea"></textarea>
+                                <label for="textarea1">Post content</label>
+                            </div>
+                        </div>
+                        <a id="post" class="waves-effect waves-light btn-large">Submit Changes</a>
+                    </form>
+                </div>
+                <div id="posts" class="row"></div>
+
+                <p>By MD</p>
+            </div>
+
+
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js"></script>
+
+
+            <script>
+
+                let editPost = localStorage.getItem('editPost');
+
+                document.getElementById('submitPost').addEventListener('click', event => {
+                    let editedPost = {
+                        title: document.getElementById("title").value,
+                        body: document.getElementById("body").value
+                    }
+                    axios.put(`/api/posts/${editPost}`, editedPost, {
+                        headers: {
+                            'Authorization': `Bearer ${localStorage.getItem('token')}`
+                        }
+                })
+                .then(res => {
+                    console.log(res.data);
+                    window.location='profile.html';
+                })
+            })
+
+
+            </script>
+
+    </body>
+
+</html>

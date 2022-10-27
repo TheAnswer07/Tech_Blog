@@ -31,5 +31,11 @@ router.delete('/posts/:id', passport.authenticate('jwt'), async function (req, r
     res.sendStatus(200);
 });
 
+router.put('/posts/:id', passport.authenticate('jwt'), async function (req, res) {
+    const post = await Post.update(req.body, { where: {id: req.params.id} })
+    res.json(post);
+});
+
+
 
 module.exports = router;
