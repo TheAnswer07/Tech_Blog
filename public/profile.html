@@ -30,20 +30,29 @@
 
             <p>By MD</p>
         </div>
-        
-
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js"></script>
         <script>
 
-            axios.get('/api/posts/user', {
+            axios.get('/api/posts/profile', {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
             })
                 .then(res => {
                     console.log(res.data);
+                    let posts = res.data.posts;
+
+                    posts.forEach(post => {
+                        document.getElementById('posts').innerHTML +=
+                            `
+                    <h2 class="post" data-post="${post.id}"> ${post.title} </h2>
+                    <h4> ${post.body} </h4>
+                    <a data-post="${post.id}" class="waves-effect waves-light btn-large">Delete</a>
+                    <hr>
+                    `
+                    })
                 })
 
             document.addEventListener('click', event => {
@@ -53,7 +62,20 @@
                     localStorage.setItem('post', postId)
                     window.location = 'post.html'
                 }
+                if (event.target.classList.contains('delete')) {
+                    let postId = event.target.dataset.post;
+
+                    axios.delete(`/api/posts/${post.id}`, {
+                        headers: {
+                            'Authorization': `Bearer ${localStorage.getItem('token')}`
+                        }
+                    })
+                        .then(res => {
+                            console.log(res.data);
+                        })
+                }
             })
+
 
         </script>
     </body>

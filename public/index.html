@@ -69,7 +69,7 @@
             let posts = res.data;
             posts.forEach(post => {
               document.getElementById('posts').innerHTML +=
-                `
+            `
             <h2 class="post" data-post="${post.id}"> ${post.title} </h2>
             <h3> ${post.User.username} </h3>
             <h4> ${post.body} </h4>
