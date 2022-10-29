@@ -27,20 +27,20 @@
             <h1>My profile</h1>
 
             <div id="posts" class="row"></div>
-
-            <p>By MD</p>
+<!-- 
+            <p>By MD</p> -->
         </div>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js"></script>
         <script>
 
-            axios.get('/api/posts/profile', {
+            axios.get('/api/users/profile', {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
             })
-                .then(res => {
+                .then((res) => {
                     console.log(res.data);
                     let posts = res.data.posts;
 
@@ -48,6 +48,7 @@
                         document.getElementById('posts').innerHTML +=
                             `
                     <h2 class="post" data-post="${post.id}"> ${post.title} </h2>
+                    <h4> by ${post.User.username} </h4>
                     <h4> ${post.body} </h4>
                     <a data-post="${post.id}" class="waves-effect waves-light btn-large delete">Delete</a>
                     <a data-post="${post.id}" class="waves-effect waves-light btn-large edit">Edit</a>
@@ -71,7 +72,7 @@
                             'Authorization': `Bearer ${localStorage.getItem('token')}`
                         }
                     })
-                        .then(res => {
+                        .then((res) => {
                             console.log(res.data);
                         })
                 }

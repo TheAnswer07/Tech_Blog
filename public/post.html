@@ -33,7 +33,7 @@
                 <form class="col s12">
                     <div class="row">
                         <div class="input-field col s12">
-                            <textarea id="commentBody" class="materialize-textarea"></textarea>
+                            <textarea id="noteBody" class="materialize-textarea"></textarea>
                             <label for="textarea1">Your comment here</label>
                         </div>
                     </div>
@@ -42,7 +42,7 @@
             </div>
 
             <div class="row">
-                <div id="commentsBody"></div>
+                <div id="comments"></div>
             </div>
 
         </div>
@@ -63,23 +63,24 @@
                     document.getElementById('title').innerHTML = `${res.data.title}`
                     document.getElementById('body').innerHTML = `${res.data.body}`
 
-                    let comments = res.data.comments;
-                    comments.forEach(comment => {
-                        document.getElementById('commentsBody').innerHTML += 
+                    let notes = res.data.notes;
+                    notes.forEach(note => {
+                        document.getElementById('comments').innerHTML += 
                         `
-                        ${comment.body}
+                        ${note.body}
                         <br>
                         `
                     });
                 })
 
             document.getElementById('submitComment').addEventListener('click', event => {
+                event.preventDefault();
                 let newComment = {
-                    body: document.getElementById('commentBody').value,
+                    body: document.getElementById('noteBody').value,
                     pid: postId
                 }
                 console.log(newComment);
-                axios.post('/api/comments', newComment, {
+                axios.post('/api/notes', newComment, {
                     headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                     }

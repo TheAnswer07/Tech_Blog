@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Post, User, Comment } = require('../models');
+const { Post, User, Note } = require('../models');
 const passport = require('passport');
 
 
@@ -16,8 +16,8 @@ router.post("/posts", passport.authenticate("jwt"), async function (req, res) {
   });
 
 router.get('/posts/:id', passport.authenticate('jwt'), async function (req, res) {
-    const post = await Post.findOne({ where: {id: req.params.id}, include: [User, Comment] })
-    res.json(post);
+    const post = await Post.findOne({ where: {id: req.params.id}, include: [User, Note] })
+    res.json(post); 
 });
 
 router.get('/posts/user', passport.authenticate('jwt'), async function (req, res) {

@@ -27,7 +27,7 @@
                     </div>
                 </div>
             </form>
-            <a id="register" class="waves-effect waves-light btn-large">Submit</a>
+            <a id="register" class="waves-effect waves-light btn-large">Register</a>
         </div>
     </div>
 
@@ -35,17 +35,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js"></script> 
     <script>
         document.getElementById('register').addEventListener('click', event => {
-            event.preventDefault()
+            event.preventDefault();
             let newUser = {
                 username: document.getElementById("username").value,
-                password: document.getElementById("password").value,
+                password: document.getElementById("password").value
             }
             console.log(newUser);
-
             axios.post('/api/users/register', newUser)
             .then(res => {
                 console.log(res);
-                window.location = 'index.hmtl';
+                window.location = 'login.hmtl';
             })
         })
     </script>

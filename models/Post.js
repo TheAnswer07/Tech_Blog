@@ -12,7 +12,7 @@ Post.init({
         allowNull: false
     }
 },
-{sequelize, modelName: "post"});
+{sequelize, modelName: 'post'});
 
 
 module.exports = Post;

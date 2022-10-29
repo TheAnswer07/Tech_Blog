@@ -45,7 +45,7 @@
                 <label for="textarea1">Your post content here</label>
               </div>
             </div>
-            <a id="post" class="waves-effect waves-light btn-large">Post</a>
+            <a id="submitPost" class="waves-effect waves-light btn-large">Submit Post</a>
           </form>
         </div>
         <div id="posts" class="row"></div>
@@ -71,7 +71,7 @@
               document.getElementById('posts').innerHTML +=
             `
             <h2 class="post" data-post="${post.id}"> ${post.title} </h2>
-            <h3> ${post.User.username} </h3>
+            <h3> by ${post.User.username} </h3>
             <h4> ${post.body} </h4>
             <hr>
             `
@@ -87,7 +87,7 @@
           }
         })
 
-        document.getElementById('post').addEventListener('click', event => {
+        document.getElementById('submitPost').addEventListener('click', event => {
           let newPost = {
             title: document.getElementById('title').value,
             body: document.getElementById('body').value

@@ -11,7 +11,7 @@ router.post('/users/register', (req, res) => {
     User.register(new User({
         username
     }), req.body.password, err => {
-        if(err) {
+        if (err) {
             console.log(err)
         }
         res.sendStatus(200)
