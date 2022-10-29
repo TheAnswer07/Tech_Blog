@@ -8,6 +8,13 @@ router.get('/posts', passport.authenticate('jwt'), async function (req, res) {
     res.json(posts);
 });
 
+router.post("/posts", passport.authenticate("jwt"), async function (req, res) {
+    const headers = req.headers.authorization;
+    console.log(headers);
+    const post = await Post.create({ ...req.body, uid: req.user.id });
+    res.json(post);
+  });
+
 router.get('/posts/:id', passport.authenticate('jwt'), async function (req, res) {
     const post = await Post.findOne({ where: {id: req.params.id}, include: [User, Comment] })
     res.json(post);
@@ -35,7 +42,6 @@ router.put('/posts/:id', passport.authenticate('jwt'), async function (req, res)
     const post = await Post.update(req.body, { where: {id: req.params.id} })
     res.json(post);
 });
-
 
 
 module.exports = router;

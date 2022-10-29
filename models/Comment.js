@@ -3,7 +3,7 @@ const sequelize = require('../db');
 
 class Comment extends Model { }
 Comment.init({
-    title: {
+    body: {
         type: DataTypes.STRING,
         allowNull: false
     }

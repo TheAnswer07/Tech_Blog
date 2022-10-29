@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 3000;
 
 const { join } = require('path');
 const passport = require('passport');
-const { User } = require('./models');
+const { User, Post } = require('./models');
 const { Strategy: JWTStrategy, ExtractJwt } = require('passport-jwt');
 const db = require('./db');
 const app = express();
@@ -44,7 +44,7 @@ passport.serializeUser((user, done) => {
 passport.use(new JWTStrategy({
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
     secretOrKey: process.env.SECRET
-}, ({ id }, cb) => User.findOne({ where: { id } })
+}, ({ id }, cb) => User.findOne({ where: { id }, include: [Post] })
     .then(user => cb(null, user))
     .catch(err => cb(err))))
 
