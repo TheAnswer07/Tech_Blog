@@ -41,7 +41,7 @@ You can contribute to this project by accessing my GitHub page.
 
 ### App Heroku Link:
 
-[App Heroku Link](https://tech-blog-md1.herokuapp.com/)
+[App Heroku Link](https://tech-blog-md7.herokuapp.com/)
 
 ### App GitHub Link:
 
