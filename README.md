@@ -12,8 +12,7 @@
 * [GitHub Profile Link](#github-profile)
 * [App Heroku Link](#app-heroku-link)
 * [GitHub App Link](#app-github-link)
-* [Screenshot:](#screenshot)
-    [Tech_Blog UI](#Tech-Blog-UI)
+* [Screenshots](#screenshots)
 
 
 
@@ -48,6 +47,8 @@ You can contribute to this project by accessing my GitHub page.
 
 [GitHub App Link](https://theanswer07.github.io/Regex_Tutorial/)
 
-### Screenshot:
+### Screenshots
 
-![Tech Blog UI](public/screenshot/Tech-Blog-UI.png "Tech Blog UI")
+![Tech Blog Home page](/public/screenshots/Tech%20Blog%20Home%20Page.png)
+![Tech Blog Post Page](/public/screenshots/Tech%20Blog%20Post%20Page.png)
+![Tech Blog Profile Page](/public/screenshots/Tech%20Blog%20Profile%20Page.png)

@@ -1,13 +1,13 @@
 require('dotenv').config();
 
 const mysql = require('mysql2');
-
+const { join } = require('path');
 const express = require('express');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
 const PORT = process.env.PORT || 3000;
 
-const { join } = require('path');
+
 const passport = require('passport');
 const { User, Post } = require('./models');
 const { Strategy: JWTStrategy, ExtractJwt } = require('passport-jwt');

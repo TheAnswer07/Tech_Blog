@@ -8,4 +8,4 @@ Post.hasMany(Note, {foreignKey: "pid"});
 Note.belongsTo(Post, {foreignKey: "pid"});
 
 
-module.exports = { User, Post, Comment };
+module.exports = { User, Post, Note };
